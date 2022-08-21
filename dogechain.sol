@@ -44,13 +44,13 @@ contract HelloDogechain {
 
     function splitPot() public payable {
         uint totalPot = address(this).balance;
+
         require(totalPot > 100 * (10**18));
+        require(msg.sender == lastMessenger);
         address payable firstHalf = payable(lastMessenger);
         firstHalf.transfer(getBalance()/2);
-        address payable secondHalf = payable(lastMessenger);
-        secondHalf.transfer(getBalance()/2);
-        address payable to = payable(lastMessenger);
-        to.transfer(getBalance());
+        address payable secondHalf = payable(owner);
+        secondHalf.transfer(getBalance());
     }
 
 }
